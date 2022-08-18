@@ -17,17 +17,58 @@ Resources:
   LimsDevFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: lims-dev/
+      CodeUri: lims_dev/
       Handler: app.app
       Runtime: python3.8
       Architectures:
         - x86_64
       Events:
-        LimsDev:
+#        Test:
+#          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+#          Properties:
+#            Path: /hello/{name}
+#            Method: get
+        Login:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
+            Path: /login
+            Method: post
+        UserProfile:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /profile
             Method: get
+        UpdateUserProfile:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /update_profile
+            Method: put
+        CreateLab:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /createlab
+            Method: post
+        UpdateLab:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /updatelab/{lab_id}
+            Method: put
+        LabList:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /labs
+            Method: get
+        DeleteLab:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /lab/{lab_id}/{name}
+            Method: delete
+        LabDetail:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /lab/{lab_id}/{name}
+            Method: get
+
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -40,5 +81,5 @@ Outputs:
     Description: "  LimsDev Lambda Function ARN"
     Value: !GetAtt LimsDevFunction.Arn
   LimsDevIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
+    Description: "Implicit IAM Role created for LimsDev function"
     Value: !GetAtt LimsDevFunctionRole.Arn

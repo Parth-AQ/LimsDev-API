@@ -1,0 +1,9 @@
+requests
+flask-lambda-python36
+werkzeug==2.0.3
+Flask-RESTful
+Flask-JWT-Extended
+Flask-SQLAlchemy
+Flask-Cors
+Flask-Mail
+PyMySQL
